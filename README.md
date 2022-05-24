@@ -2,11 +2,13 @@
 
 This repository implements the DeOldify pre-trained image colourisation model into a Flask API. The pre-trained image colourisation model is provided thanks to the great work by the [DeOldify Team](https://deoldify.ai/). The instruction to get the pre-trained model can be found in their [Github](https://github.com/jantic/DeOldify). There are 2 pre-trained models - Artistic and Stable. Information about these 2 models can be found in the readme file of the DeOldify Github. 
 
-This repository wraps the **Stable** model into the Flask API. The repo is grouped into 2 folders - Server and App. The names should be quite self-explanatory. The _server.py_ file in the Server directory runs the Flask server, look for the Stable pretrained model with file name _ColorizeStable_gen.pth_ in the models directory. If the found is not found, then it will download a copy of the model weight from the DeOldify shared directory. The App folder implements the _process_ command which issues a POST request to the server. All return colourised images are saved in the _post_responses_ folder.
+This repository wraps the **Stable** model into the Flask API. The repo is grouped into 2 folders - Server and App. The names should be quite self-explanatory. The _server.py_ file in the Server directory runs the Flask server, look for the Stable pretrained model with file name _ColorizeStable_gen.pth_ in the models directory. If the found is not found, then it will download a copy of the model weight from the DeOldify shared directory. The server function is implemented with reference from DeOldify's libraries found in the _deoldify_ sub-directory. 
 
 Terminal 1 (server):
 > cd server
 > python server.py
+
+The App folder implements the _process_ command which issues a POST request to the server. All return colourised images are saved in the _post_responses_ folder.
 
 Terminal 2 (app):
 > cd app
