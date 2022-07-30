@@ -16,6 +16,10 @@ def process_image(image, url, output_folder):
     file_ext = os.path.splitext(filename)[1]
 
     if file_ext in ['.jpg', '.png', '.jpeg']:
+        # pillow save image format only allows .jpeg, not .jpg
+        if file_ext == '.jpg':
+            file_ext = '.jpeg'
+
         image = Image.open(image, mode = 'r')
         byteIO = io.BytesIO()
         image.save(byteIO, format=file_ext[1:])
@@ -23,6 +27,7 @@ def process_image(image, url, output_folder):
 
         payload = {"filename": filename, "file": image}
         response = requests.post(url+"process", files=payload)
+        # response = requests.post("http://127.0.0.1:4000/process", files={"file": open(image, "rb")})
 
         data = response.json()
 

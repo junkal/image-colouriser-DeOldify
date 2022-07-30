@@ -18,6 +18,11 @@ from deoldify.visualize import *
 
 app = flask.Flask(__name__)
 
+## global variables
+colorizer = get_image_colorizer(artistic=False)
+upload_directory = './upload'
+model_directory = './models'
+
 def create_directory(path):
     if not os.path.isdir(path):
         os.makedirs(path, exist_ok=True)
@@ -64,22 +69,14 @@ def process_image():
     return flask.jsonify(data)
 
 def main():
+	create_directory(model_directory)
+	create_directory(upload_directory)
 
-    global colorizer
-    global upload_directory
+	model_url = "https://www.dropbox.com/s/usf7uifrctqw9rl/ColorizeStable_gen.pth?dl=0"
+	get_model(model_url, os.path.join(model_directory, "ColorizeStable_gen.pth"))
 
-    model_directory = './models'
-    create_directory(model_directory)
-
-    upload_directory = './upload'
-    create_directory(upload_directory)
-
-    model_url = "https://www.dropbox.com/s/usf7uifrctqw9rl/ColorizeStable_gen.pth?dl=0"
-    get_model(model_url, os.path.join(model_directory, "ColorizeStable_gen.pth"))
-
-    colorizer = get_image_colorizer(artistic=False)
-
-    app.run(host="127.0.0.1", port=4000, debug=True)
+	# app.run(host="127.0.0.1", port=4000, debug=True)
+	app.run(host="127.0.0.1", debug=True)
 
 if __name__ == "__main__":
     main()
