@@ -6,12 +6,14 @@ This repository wraps the **Stable** model into the Flask API. The repo is group
 
 Terminal 1 (server):
 > cd server
+
 > python server.py
 
 The App folder implements the _process_ command which issues a POST request to the server. All return colourised images are saved in the _post_responses_ folder.
 
 Terminal 2 (app):
 > cd app
+
 > python post_image.py --image path/to/image/with/extension
 
 The pre-trained model provides pretty good quality image colourisation. Some samples provided below. The left images are the original images while and right images are the colourised images.
